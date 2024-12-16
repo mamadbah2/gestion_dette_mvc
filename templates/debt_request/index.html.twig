@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DebtRequestController!{% endblock %}
+
+{% block body %}
+    <h1>DebtRequest</hh1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Debtor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for debt_request in debt_requests %}
+                <tr>
+                    <td>{{ debt_request.id }}</td>
+                    <td>{{ debt_request.amount }}</td>
+                    <td>{{ debt_request.client }}</td>
+                    {# <td>
+                        <a href="{{ path('debt_request_show', {'id': debt_request.id}) }}">show</a>
+                        <a href="{{ path('debt_request_edit', {'id': debt_request.id}) }}">edit</a>
+                    </td> #}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+{% endblock %}

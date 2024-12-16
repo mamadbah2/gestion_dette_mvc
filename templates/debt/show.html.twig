@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dette{% endblock %}
+
+{% block body %}
+
+<h1> Dette du client : {{client.surname}} </h1>
+<a href="{{ path('debt.create', {'id': client.id}) }}">Ajouter une dette</a>
+<h3> Listes des dettes non soldee </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Montant</th>
+            <th>Montant_Paye</th>
+            <th>Montant_Restant</th>
+            <th>Date</th>
+            <th>Articles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for debt in debts %}
+        {% if debt.getRemainingMount() > 0 %}
+        <tr>
+            <td>{{debt.mount}} CFA</td>
+            <td>{{debt.getPaidMount()}} CFA</td>
+            <td>{{debt.getRemainingMount()}} CFA</td>
+            <td>{{debt.date|date('d/m/Y')}}</td>
+            <td>
+                <ul>
+                    {% for detailDebt in debt.detailDebts %}
+                    <li>{{detailDebt.article.libelle}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <a href="{{ path('debt.detail', {'id': debt.id}) }}">Detail</a>
+                <a href="{{ path('paiement.debt', {'id': debt.id}) }}" >Payer</a>
+                <a href="{{ path('debt.delete', {'id': debt.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+    
+{% endblock %}

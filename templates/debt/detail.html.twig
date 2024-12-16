@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la dette{% endblock %}
+
+{% block body %}
+<h1> Détail de la dette </h1>
+<table>
+    <tr>
+        <th>Client</th>
+        <td>{{ debt.client.surname }}</td>
+    </tr>
+    <tr>
+        <th>Montant</th>
+        <td>{{ debt.mount }}</td>
+    </tr>
+    <tr>
+        <th>Paiements</th>
+        <td>
+            <ul>
+                {% for paiement in debt.payments %}
+                    <li>A date du {{ paiement.date|date('d/m/Y') }} solde {{ paiement.amount }} CFA </li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Articles</th>
+        <td>
+            <ul>
+                {% for detailDebt in debt.detailDebts %}
+                    <li>{{ detailDebt.article.libelle }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

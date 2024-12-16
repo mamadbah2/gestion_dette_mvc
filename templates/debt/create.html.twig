@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte User{% endblock %}
+
+{% block body %}
+<h1> Ajouter une dette </h1>
+{{ form_start(form) }} 
+{{ form_row(form.date) }} 
+<h3>Articles</h3> 
+    <div id="detail_debts_container"> 
+        {{ form_widget(form.detailDebts.0) }} 
+    </div> 
+{{ form_row(form.Enregistrer) }} 
+{{ form_end(form) }}
+{% endblock %}

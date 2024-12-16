@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+<h1> Gestion des clients </h1>
+<a href="{{ path('client.create') }}">Ajouter un client</a>
+<h3> Liste des clients </h3>
+
+<div>
+    <form action="{{ path('client.index') }}" method="GET">
+        <span>Rechercher par telephone</span>
+        <input type="text" name="telephone" >
+        <button type="submit">Rechercher</button>
+    </form>
+</div>
+
+<div>
+    <form action="{{ path('client.index') }}" method="GET">
+        <span>Filtrer par Compte</span>
+        <select name="userAccount">
+            <option value="all" {{ userAccount == "all" ? 'selected' : ''}} >Tous</option>
+            <option value="true" {{ userAccount == "true" ? 'selected' : ''}}>Avec Compte</option>
+            <option value="false" {{ userAccount == "false" ? 'selected' : ''}}>Sans Compte</option>
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Surnom</th>
+            <th>Telephone</th>
+            <th>Adresse</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.surname }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>
+                    <a href="{{ path('debt.client', {'id': client.id}) }}">Debt</a>
+                    <a href="{{ path('client.edit', {'id': client.id}) }}">Modifier</a>
+                    {% if client.userAccount is null %}
+                    <a href="{{ path('user.create', {'id': client.id}) }}">+UserAccount</a>
+                    {% endif %}
+                    <a href="{{ path('client.delete', {'id': client.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
