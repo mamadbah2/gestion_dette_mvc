@@ -21,17 +21,6 @@ class UserFormType extends AbstractType
             ->add('email')
             ->add('login')
             ->add('password', PasswordType::class)
-            ->add('is_active', CheckboxType::class, [
-                'label'=> 'Actif',
-                'required'=> true, 
-                'attr'=> [
-                    'checked'=> 'checked',
-                ],
-            ])
-            ->add('client', EntityType::class, [
-                'class' => Client::class,
-                'choice_label' => 'id',
-            ])
             ->add('roles', ChoiceType::class, [ 
                 'choices' => [ 
                     'Admin' => 'ROLE_ADMIN', 

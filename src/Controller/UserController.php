@@ -29,7 +29,8 @@ class UserController extends AbstractController
         $form->handleRequest($req);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $newUser->setActive(true);
+            $newUser->setClient($client);
             $client->setUserAccount($newUser);
             $newUser->setClient($client);
 
