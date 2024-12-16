@@ -39,6 +39,7 @@ class AppFixtures extends Fixture
         }
 
         $debtArray = [];
+        $clientArray = [];
         $debtRequestArray = [];
         $roleArray = ['ROLE_ADMIN', 'ROLE_BOUTIQUIER', 'ROLE_CLIENT'];
         for ($i = 0; $i < 10; $i++) {
@@ -97,6 +98,8 @@ class AppFixtures extends Fixture
             $payment->setDate($faker->dateTimeBetween('-1 year', 'now'));
             $payment->setDebt($debtArray[random_int(0, $i >= 4 ? 3 : $i)]);
             
+            $clientArray[] = $client;
+
             $manager->persist($payment);
             $manager->persist($detailDebtRequest);
             $manager->persist($detailDebt);
@@ -110,7 +113,8 @@ class AppFixtures extends Fixture
             ->setEmail('admin@localhost')
             ->setLogin('admin')
             ->setActive(true);
-        $myUser->setRoles(['ROLE_BOUTIQUIER']);
+        $myUser->setRoles(['ROLE_CLIENT']);
+        $myUser->setClient($clientArray[random_int(5, 9)]);
 
         $myUser->setPassword($this->encoder->hashPassword($user, 'admin'));
         $manager->persist($myUser);

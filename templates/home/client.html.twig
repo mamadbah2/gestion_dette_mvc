@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+<h1> Accueil Client </h1>
+<ul>
+    {% if client is not null %}
+    <li><a href="{{ path('debt.client', {'id': client.id}) }}">Gestion des dettes</a></li>
+    <li><a href="#">Gestion des demandes de dette</a></li>
+    {# <li><a href="{{ path('debt_request.index') }}">Gestion des demandes de dette</a></li> #}
+    {% else %}
+        <li> Pas de compte client associe </li>
+    {% endif %}
+
+</ul>
+{% endblock %}

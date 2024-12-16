@@ -57,6 +57,7 @@ class ClientController extends AbstractController
         ]);
     }
 
+
     #[Route('/client/{id}/delete', name:'client.delete')]
     public function delete(ClientRepository $repository, EntityManagerInterface $em, int $id): Response
     {
