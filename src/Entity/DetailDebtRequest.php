@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DetailDebtRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DetailDebtRequestRepository::class)]
 class DetailDebtRequest
@@ -11,18 +12,25 @@ class DetailDebtRequest
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["debt_request.api.index"])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'detailDebtRequests')]
+    #[Groups(["debt_request.api.index"])]
+
     private ?Article $article = null;
 
     #[ORM\ManyToOne(inversedBy: 'detailDebtRequests')]
     private ?DebtRequest $DebtRequest = null;
 
     #[ORM\Column]
+    #[Groups(["debt_request.api.index"])]
+
     private ?int $quantity = null;
 
     #[ORM\Column]
+    #[Groups(["debt_request.api.index"])]
+
     private ?int $prix = null;
 
     public function getId(): ?int

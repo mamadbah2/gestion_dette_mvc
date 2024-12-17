@@ -7,19 +7,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[Groups(["debt.api.index"])]
 #[ORM\Entity(repositoryClass: DebtRepository::class)]
 class Debt
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["payment.api.index"])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(["payment.api.index"])]
     private ?int $mount = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(["payment.api.index"])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
@@ -29,6 +34,7 @@ class Debt
     private ?int $remaining_mount = null;
 
     #[ORM\Column]
+    #[Groups(["payment.api.index"])]
     private ?bool $is_achieved = null;
 
     /**

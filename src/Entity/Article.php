@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -13,12 +14,15 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["debt.api.index", "debt_request.api.index"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 25)]
+    #[Groups(["debt.api.index", "debt_request.api.index"])]
     private ?string $libelle = null;
 
     #[ORM\Column]
+    #[Groups(["debt.api.index", "debt_request.api.index"])]
     private ?int $qte_stock = null;
 
     /**
@@ -28,6 +32,7 @@ class Article
     private Collection $detailDebts;
 
     #[ORM\Column]
+    #[Groups(["debt.api.index", "debt_request.api.index"])]
     private ?int $prix = null;
 
     /**

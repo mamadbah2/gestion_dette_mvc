@@ -6,6 +6,7 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
@@ -13,15 +14,19 @@ class Client
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["client.api.index", "debt_request.api.index"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["client.api.index", "debt.api.index", "debt_request.api.index"])]
     private ?string $surname = null;
 
     #[ORM\Column(length: 22)]
+    #[Groups(["client.api.index", "debt_request.api.index"])]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["client.api.index", "debt_request.api.index"])]
     private ?string $adresse = null;
 
     #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]

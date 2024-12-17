@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\PaymentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PaymentRepository::class)]
+#[Groups(["payment.api.index"])]
 class Payment
 {
     #[ORM\Id]
