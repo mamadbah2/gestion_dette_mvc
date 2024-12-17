@@ -17,4 +17,6 @@ class DetailDebtRequestControllerAPI extends AbstractController
              'groups'=> 'detail_debt_request.api.index',
          ]);
     }
+
+    
 }
